@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+body{
+    background-color: aliceblue;
+    font-family: "Nunito", Georgia, Times, 'Times New Roman', serif;
+}
+
+.main_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main{
+    background-color: lightcoral;
+    width: 50vw;
+    margin-top: 3vh;
+}
+
+h1 {
+    margin-left: 1em;
+    font-weight: 800;
+    font-size: 2.5em;
+}
+
+.add_container{
+    position: relative;
+}
+.add_btn{
+    position: fixed;
+    right: 1.5vw;
+    bottom: 2.5vh;
+    width: 4vw;
+    height: 4vw;
+    font-size: 3em;
+    font-weight: 800;
+    font-family: "Nunito";
+    padding: 0;
+    border-radius: 200px;
+    background-color: aqua;
+    border-color: rgba(0, 0, 0, 0);
+}
