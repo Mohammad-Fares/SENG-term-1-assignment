@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CGX</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="/manifest.json">
 </head>
 <body>
     <div class="main_container">
         <div class="main">
             <h1>Tasks</h1>
+            <form class="search_form">
+                <input type="date" id="search_date" placeholder="Search by Date">
+                <button type="button" id="search_btn">Search</button>
+            </form>
             <div class="empty">Hooray, no tasks left :)</div>
             <form class="create_task" style="display: none;">
                 <input type="text" id="task_name" placeholder="Task Name" required>

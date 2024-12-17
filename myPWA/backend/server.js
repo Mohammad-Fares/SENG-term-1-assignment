@@ -42,6 +42,25 @@ app.post('/api/tasks', (req, res) => {
         });
 });
 
+// Get all tasks or tasks by date
+app.get('/api/tasks', (req, res) => {
+    const { date } = req.query;
+    let query = 'SELECT * FROM tasks';
+    let params = [];
+    if (date) {
+        query += ' WHERE date = ?';
+        params.push(date);
+    }
+    db.all(query, params, (err, rows) => {
+        if (err) {
+            res.status(500).send('Error retrieving data');
+        } else {
+            res.status(200).json(rows);
+        }
+    });
+});
+
+
 // Get a single task by ID
 app.get('/api/tasks/:id', (req, res) => {
     const { id } = req.params;
@@ -52,6 +71,33 @@ app.get('/api/tasks/:id', (req, res) => {
             res.status(404).send('Task not found');
         } else {
             res.status(200).json(row);
+        }
+    });
+});
+
+// Update a task
+app.put('/api/tasks/:id', (req, res) => {
+    const { id } = req.params;
+    const { name, date, priority, completed } = req.body;
+    db.run(`UPDATE tasks SET name = ?, date = ?, priority = ?, completed = ? WHERE id = ?`,
+        [name, date, priority, completed, id],
+        function (err) {
+            if (err) {
+                res.status(500).send('Error updating data');
+            } else {
+                res.status(200).send('Updated successfully');
+            }
+        });
+});
+
+// Delete a task
+app.delete('/api/tasks/:id', (req, res) => {
+    const { id } = req.params;
+    db.run(`DELETE FROM tasks WHERE id = ?`, id, function (err) {
+        if (err) {
+            res.status(500).send('Error deleting data');
+        } else {
+            res.status(200).send('Deleted successfully');
         }
     });
 });
