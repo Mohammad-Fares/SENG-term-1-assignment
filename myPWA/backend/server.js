@@ -7,11 +7,9 @@ const path = require('path');
 const app = express();
 const port = 3001;
 
-// Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
-// Set up SQLite database
 const dbPath = path.join(__dirname, 'database', 'todo_list.db');
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
@@ -28,7 +26,6 @@ const db = new sqlite3.Database(dbPath, (err) => {
     }
 });
 
-// Create a new task
 app.post('/api/tasks', (req, res) => {
     const { name, date, priority } = req.body;
     db.run(`INSERT INTO tasks (name, date, priority) VALUES (?, ?, ?)`,
@@ -42,7 +39,6 @@ app.post('/api/tasks', (req, res) => {
         });
 });
 
-// Get all tasks or tasks by date
 app.get('/api/tasks', (req, res) => {
     const { date } = req.query;
     let query = 'SELECT * FROM tasks';
@@ -61,7 +57,6 @@ app.get('/api/tasks', (req, res) => {
 });
 
 
-// Get a single task by ID
 app.get('/api/tasks/:id', (req, res) => {
     const { id } = req.params;
     db.get('SELECT * FROM tasks WHERE id = ?', [id], (err, row) => {
@@ -75,7 +70,6 @@ app.get('/api/tasks/:id', (req, res) => {
     });
 });
 
-// Update a task
 app.put('/api/tasks/:id', (req, res) => {
     const { id } = req.params;
     const { name, date, priority, completed } = req.body;
@@ -90,7 +84,6 @@ app.put('/api/tasks/:id', (req, res) => {
         });
 });
 
-// Delete a task
 app.delete('/api/tasks/:id', (req, res) => {
     const { id } = req.params;
     db.run(`DELETE FROM tasks WHERE id = ?`, id, function (err) {
@@ -102,10 +95,8 @@ app.delete('/api/tasks/:id', (req, res) => {
     });
 });
 
-// Serve static files from the frontend directory
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// Start the server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });

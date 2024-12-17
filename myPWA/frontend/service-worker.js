@@ -7,10 +7,9 @@ const urlsToCache = [
     '/manifest.json',
     '/Icons/save.png',
     '/Icons/save1.png'
-    // Add any additional assets you want to cache
 ];
 
-// Install the service worker and cache the app's resources
+
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
@@ -21,18 +20,15 @@ self.addEventListener('install', event => {
     );
 });
 
-// Fetch requests
 self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request)
             .then(response => {
-                // Return the cached response if found, otherwise fetch from network
                 return response || fetch(event.request).catch(() => caches.match('/index.html'));
             })
     );
 });
 
-// Activate the service worker
 self.addEventListener('activate', event => {
     const cacheWhitelist = [CACHE_NAME];
     event.waitUntil(
