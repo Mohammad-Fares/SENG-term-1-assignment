@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CGX</title>
+    <title>Todo List App</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="/manifest.json">
 </head>
@@ -11,10 +11,22 @@
     <div class="main_container">
         <div class="main">
             <h1>Tasks</h1>
-            <form class="search_form">
-                <input type="date" id="search_date" placeholder="Search by Date">
-                <button type="button" id="search_btn">Search</button>
-            </form>
+            <div class="priority-section">
+                <h2>Priority 1</h2>
+                <ul class="task_list priority-1"></ul>
+            </div>
+            <div class="priority-section">
+                <h2>Priority 2</h2>
+                <ul class="task_list priority-2"></ul>
+            </div>
+            <div class="priority-section">
+                <h2>Priority 3</h2>
+                <ul class="task_list priority-3"></ul>
+            </div>
+            <div class="priority-section">
+                <h2>Priority 4</h2>
+                <ul class="task_list priority-4"></ul>
+            </div>
             <div class="empty">Hooray, no tasks left :)</div>
             <form class="create_task" style="display: none;">
                 <input type="text" id="task_name" placeholder="Task Name" required>
@@ -27,7 +39,12 @@
                 </select>
                 <button type="submit">Add task</button>
             </form>
-            <ul class="task_list"></ul>
+        </div>
+        <div class="search-container">
+            <form class="search_form">
+                <input type="date" id="search_date" placeholder="Search by Date">
+                <button type="button" id="search_btn">Search</button>
+            </form>
         </div>
     </div>
 

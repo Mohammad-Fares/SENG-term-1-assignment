@@ -1,1 +1,1 @@
-SELECT * FROM table1;
+SELECT * FROM todo_list.db;

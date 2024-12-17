@@ -13,7 +13,6 @@ if ('serviceWorker' in navigator) {
 document.addEventListener('DOMContentLoaded', () => {
     const addBtn = document.querySelector('.add_btn');
     const taskForm = document.querySelector('.create_task');
-    const taskList = document.querySelector('.task_list');
     const noTasksMessage = document.querySelector('.empty');
     const searchBtn = document.getElementById('search_btn');
     const searchDateInput = document.getElementById('search_date');
@@ -23,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     addBtn.addEventListener('click', () => {
         taskForm.style.display = 'flex';
     });
-
+    
     taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const taskName = document.getElementById('task_name').value;
@@ -113,13 +112,23 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(url)
         .then(response => response.json())
         .then(data => {
-            taskList.innerHTML = '';
+            clearTaskLists();
             data.forEach(task => {
                 displayTask(task);
             });
-            noTasksMessage.style.display = taskList.children.length ? 'none' : 'block';
+            noTasksMessage.style.display = taskListIsEmpty() ? 'block' : 'none';
         })
         .catch(error => console.error('Error:', error));
+    }
+
+    function clearTaskLists() {
+        document.querySelectorAll('.task_list').forEach(list => {
+            list.innerHTML = '';
+        });
+    }
+
+    function taskListIsEmpty() {
+        return !document.querySelector('.task_list li');
     }
 
     function displayTask(task) {
@@ -129,8 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <button onclick="editTask(${task.id})">Edit</button>
             <button onclick="deleteTask(${task.id})">Delete</button>
         `;
-        taskList.appendChild(taskItem);
-    }    
+        document.querySelector(`.priority-${task.priority}`).appendChild(taskItem);
+    }
 
     loadTasks();
 
