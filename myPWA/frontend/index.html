@@ -11,7 +11,7 @@
         <div class="main">
             <h1>Tasks</h1>
             <div class="empty">Hooray, no tasks left :)</div>
-            <form class="create_task" >
+            <form class="create_task" style="display: none;">
                 <input type="text" name="task_name" id="task_name" placeholder="Task name" required>
                 <input type="text" id="task_date" required>
                 <select name="priorities" id="priorities">
@@ -20,14 +20,16 @@
                     <option value="3">3</option>
                     <option value="4" selected>4</option>
                 </select>
-                <button type="submit"></button>
+                <button type="submit">Add task</button>
             </form>
-
+            <ul class="task_list"></ul>
         </div>
     </div>
 
     <div class="add_container">
         <button class="add_btn">+</button>
     </div>
+
+    <script src="app.js"></script>
 </body>
 </html>
