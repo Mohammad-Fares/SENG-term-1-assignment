@@ -4,12 +4,13 @@ body{
     font-family: "Nunito", Georgia, Times, 'Times New Roman', serif;
 }
 
-.main_container{
+.main_container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.main{
+
+.main {
     background-color: lightcoral;
     width: 50vw;
     margin-top: 3vh;
@@ -21,10 +22,11 @@ h1 {
     font-size: 2.5em;
 }
 
-.add_container{
+.add_container {
     position: relative;
 }
-.add_btn{
+
+.add_btn {
     position: fixed;
     right: 1.5vw;
     bottom: 2.5vh;
@@ -36,10 +38,11 @@ h1 {
     padding: 0;
     border-radius: 200px;
     background-color: aqua;
-    border-color: rgba(0, 0, 0, 0);
+    border: none;
+    cursor: pointer;
 }
 
-.create_task{
+.create_task {
     display: flex;
     flex-direction: column;
     gap: 1em;
