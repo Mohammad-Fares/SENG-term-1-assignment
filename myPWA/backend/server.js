@@ -20,8 +20,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
             date TEXT,
-            priority INTEGER,
-            completed INTEGER DEFAULT 0
+            priority INTEGER
         )`);
     }
 });
@@ -72,9 +71,9 @@ app.get('/api/tasks/:id', (req, res) => {
 
 app.put('/api/tasks/:id', (req, res) => {
     const { id } = req.params;
-    const { name, date, priority, completed } = req.body;
-    db.run(`UPDATE tasks SET name = ?, date = ?, priority = ?, completed = ? WHERE id = ?`,
-        [name, date, priority, completed, id],
+    const { name, date, priority} = req.body;
+    db.run(`UPDATE tasks SET name = ?, date = ?, priority = ? WHERE id = ?`,
+        [name, date, priority, id],
         function (err) {
             if (err) {
                 res.status(500).send('Error updating data');

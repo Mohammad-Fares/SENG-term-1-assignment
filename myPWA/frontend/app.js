@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         taskForm.style.display = 'none';
         isEditMode = false;
         editId = null;
+        loadTasks();
     });
 
     searchBtn.addEventListener('click', () => {
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(response => response.json())
         .then(data => {
-            displayTask({ id: data.id, name, date, priority, completed: 0 });
+            displayTask({ id: data.id, name, date, priority });
             noTasksMessage.style.display = 'none';
         })
         .catch(error => console.error('Error:', error));
@@ -72,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name, date, priority, completed: 0 })
+            body: JSON.stringify({ name, date, priority })
         })
         .then(() => {
             loadTasks();
